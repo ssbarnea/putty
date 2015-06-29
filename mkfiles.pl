@@ -1120,7 +1120,7 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'} || define
             "    <SccLocalPath />\n" .
             "    <ProjectGuid>{$projguid}</ProjectGuid>\n" .
             "  </PropertyGroup>\n" .
-            "  <Import Project=\"\$(VCTargetsPath)\\Microsoft.Cpp.Default.props\" />\n" .
+            "  <Import Project=\"\$(VCTargetsPath)\\Microsoft.Cpp.Default.props\" Condition=\"exists('\$(VCTargetsPath)\\Microsoft.Cpp.Default.props')\" />\n" .
             "  <PropertyGroup Condition=\"'\$(Configuration)|\$(Platform)'=='Debug|Win32'\" Label=\"Configuration\">\n" .
             "    <ConfigurationType>Application</ConfigurationType>\n" .
             "    <UseOfMfc>false</UseOfMfc>\n" .
@@ -1133,7 +1133,7 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'} || define
             "    <CharacterSet>MultiByte</CharacterSet>\n" .
             "    <PlatformToolset>$toolsver</PlatformToolset>\n" .
             "  </PropertyGroup>\n" .
-            "  <Import Project=\"\$(VCTargetsPath)\\Microsoft.Cpp.props\" />\n" .
+            "  <Import Project=\"\$(VCTargetsPath)\\Microsoft.Cpp.props\" Condition=\"exists('\$(VCTargetsPath)\\Microsoft.Cpp.props')\" />\n" .
             "  <ImportGroup Label=\"ExtensionTargets\">\n" .
             "  </ImportGroup>\n" .
             "  <ImportGroup Condition=\"'\$(Configuration)|\$(Platform)'=='Debug|Win32'\" Label=\"PropertySheets\">\n" .
@@ -1300,7 +1300,7 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'} || define
         print "  </ItemGroup>\n";
 
         print
-            "  <Import Project=\"\$(VCTargetsPath)\\Microsoft.Cpp.targets\" />\n" .
+            "  <Import Project=\"\$(VCTargetsPath)\\Microsoft.Cpp.targets\" Condition=\"exists('\$(VCTargetsPath)\\Microsoft.Cpp.targets')\" />\n" .
             "</Project>";
 
         print FILTERS
