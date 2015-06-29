@@ -259,7 +259,7 @@ sub mfval($) {
     # prints a warning and returns false;
     if (grep { $type eq $_ }
 	("vc","vcproj","cygwin","borland","lcc","devcppproj","gtk","unix",
-         "am","osx","vstudio10","vstudio12","vstudio13")) {
+         "am","osx","vstudio10","vstudio12","vstudio13","msbuild")) {
         return 1;
     }
     warn "$.:unknown makefile type '$type'\n";
@@ -305,7 +305,7 @@ sub findfile {
         $outdir =~ s/^\.\///;
       }
     }
-    die "multiple instances of source file $name\n" if $i > 1;
+    warn "multiple instances of source file $name\n" if $i > 1;
     $findfilecache{$name} = (defined $outdir ? $outdir . $name : undef);
   }
   return $findfilecache{$name};
@@ -964,7 +964,7 @@ if (defined $makefiles{'vcproj'}) {
     }
 }
 
-if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'} || defined $makefiles{'vstudio13'}) {
+if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'} || defined $makefiles{'vstudio13'} || defined $makefiles{'msbuild'}) {
 
     ##-- Visual Studio 2010+ Solution and Projects
 
@@ -978,6 +978,10 @@ if (defined $makefiles{'vstudio10'} || defined $makefiles{'vstudio12'} || define
 
     if (defined $makefiles{'vstudio13'}) {
         create_vs_solution('vstudio13', "2013", "13.00", "v120");
+    }
+
+    if (defined $makefiles{'msbuild'}) {
+        create_vs_solution('msbuild', "msbuild", "12.00", "v120");
     }
 
     sub create_vs_solution {
